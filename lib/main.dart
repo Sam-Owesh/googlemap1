@@ -13,7 +13,6 @@ import 'package:provider/provider.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  
   final locatorService = GeoLocatorService();
   final placesService = PlacesService();
 
@@ -22,16 +21,20 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         // ignore: missing_required_param
-        FutureProvider(create: (context) => locatorService.getLocation(), initialData: null,),
+        FutureProvider(
+          create: (context) => locatorService.getLocation(),
+          initialData: null,
+        ),
         ProxyProvider<Position, Future<List<Place>>>(
           update: (context, position, places) {
             // ignore: unnecessary_null_comparison
             if ((position != null)) {
-              return placesService.getPlaces(position.latitude, position.longitude);
+              return placesService.getPlaces(
+                  position.latitude, position.longitude);
             } else {
-               var currentPosition;
-              return placesService.getPlaces(currentPosition.latitude,
-              currentPosition.longitude);
+              var currentPosition;
+              return placesService.getPlaces(
+                  currentPosition.latitude, currentPosition.longitude);
             }
           },
         )
