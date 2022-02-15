@@ -2,9 +2,9 @@ import 'package:gmap/models/place.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MarkerService {
-  List<Marker> getMarkers(List<Place> places) {
+  Set<Marker> getMarkers(List<Place> places) {
     // ignore: deprecated_member_use, unused_local_variable
-    var markers = List<Marker>();
+     final Set<Marker> markers = new Set();
     places.forEach((place) {
       Marker marker = Marker(
           markerId: MarkerId(place.name),

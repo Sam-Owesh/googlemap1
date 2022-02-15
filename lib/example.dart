@@ -3,7 +3,7 @@ import 'package:gmap/screens/Recess.dart';
 import 'package:http/http.dart' as http;
 
 class Example extends StatefulWidget {
-  const Example({Key key}) : super(key: key);
+  const Example({Key? key}) : super(key: key);
 
   @override
   _ExampleState createState() => _ExampleState();
@@ -25,7 +25,7 @@ class _ExampleState extends State<Example> {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
-        child: FutureBuilder(
+        child: FutureBuilder<dynamic>(
           future: fetch(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -35,7 +35,7 @@ class _ExampleState extends State<Example> {
                 itemCount: snapshot.data.length,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, index) {
-                  Photo posts = snapshot.data[index];
+                  Photo posts = snapshot.data.index;
                   return Card(
                     color: Colors.grey,
                     child: Padding(

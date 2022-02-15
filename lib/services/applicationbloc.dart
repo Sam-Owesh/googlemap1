@@ -4,7 +4,7 @@ import 'package:gmap/services/geolocator_service.dart';
 
 class ApplicationBloc with ChangeNotifier {
   final geoLocatorService = GeoLocatorService();
-  Position currentLocation;
+  late Position currentLocation;
   setCurrentLocation() async {
     currentLocation = await geoLocatorService.getLocation();
     notifyListeners();

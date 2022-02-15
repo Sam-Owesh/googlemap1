@@ -14,14 +14,14 @@ import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-//import 'Recess.dart';
-//import '../models/place.dart';
+import 'Recess.dart';
+import '../models/place.dart';
 
 const double CAMERA_TILT = 80;
 const double CAMERA_BEARING = 30;
 
 class Search extends StatefulWidget {
-  const Search({Key key}) : super(key: key);
+  const Search({Key? key}) : super(key: key);
 
   @override
   _SearchState createState() => _SearchState();
@@ -42,18 +42,20 @@ class _SearchState extends State<Search> {
     // ignore: missing_required_param
     return FutureProvider(
         create: (context) => placesProvider,
+        initialData: [],
         child: Scaffold(
+          // ignore: unnecessary_null_comparison
           body: (currentPosition != null)
               ? Consumer<List<Place>>(
-                  // Consumer<List<Place>>(
+                  //Consumer<List<Place>>(
                   builder: (_, places, __) {
-                  // ignore: deprecated_member_use, unused_local_variable
-                  var list = List<Marker>();
-                  var markers = (places != null)
+                  // ignore: deprecated_member_use, unused_local_variable, unnecessary_null_comparison
+                      var markers = (places != null)
                       ? markerService.getMarkers(places)
                       // ignore: deprecated_member_use
-                      : List<Marker>();
+                      : <Marker>[];
                   //  if ((places != null)) {
+                  // ignore: unnecessary_null_comparison
                   return (places != null)
                       ? Column(
                           //Stack(
@@ -102,6 +104,7 @@ class _SearchState extends State<Search> {
                                                   .geometry
                                                   .location
                                                   .lng),
+                                      initialData: null,
                                       child: Card(
                                         child: ListTile(
                                           title: Text(places[index].name),
@@ -154,11 +157,11 @@ class _SearchState extends State<Search> {
   }
 
   RatingBarIndicator(
-      {double rating,
-      Icon Function(dynamic context, dynamic index) itembuilder,
-      int itemCount,
-      double itemSize,
-      Axis direction}) {}
+      {double? rating,
+      Icon Function(dynamic context, dynamic index)? itembuilder,
+      int? itemCount,
+      double? itemSize,
+      Axis? direction}) {}
   // ignore: unused_element
   void _launchMapsUrl(double lat, double lng) async {
     final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lng';

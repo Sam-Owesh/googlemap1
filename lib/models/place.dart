@@ -7,7 +7,7 @@ class Place{
   final String vicinity;
   final Geometry geometry;
 
-  Place({this.geometry, this.name, this.rating, this.userRatingCount, this.vicinity});
+  Place({required this.geometry, required this.name, required this.rating, required this.userRatingCount, required this.vicinity});
 
   Place.fromJson(Map<dynamic, dynamic> parsedJson)
     :name = parsedJson['name'],
