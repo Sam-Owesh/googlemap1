@@ -1,15 +1,20 @@
+// ignore: unused_import
 import 'package:gmap/models/place.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class PlacesService {
-  final key = 'YOUR_KEY';
+  final String key = 'AIzaSyATHhkFU0a6YLIusKCPaxFxA1jgdwkRFpM';
 
   Future<List<Place>> getPlaces(double lat, double lng) async {
-    var response = await http.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$lng&type=parking&rankby=distance&key=$key');
+    var response = await http.get(Uri.parse(
+        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat}%2C${lng}&radius=1000&type=gym&key=${key}'
+        ));
+    
     var json = convert.jsonDecode(response.body);
     var jsonResults = json['results'] as List;
     return jsonResults.map((place) => Place.fromJson(place)).toList();
   }
-
+  
 }
+

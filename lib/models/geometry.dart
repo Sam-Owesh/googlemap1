@@ -7,4 +7,5 @@ class Geometry {
 
   Geometry.fromJson(Map<dynamic,dynamic> parsedJson)
     :location = Location.fromJson(parsedJson['location']);
+    
 }
